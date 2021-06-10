@@ -128,3 +128,19 @@ footer {
   color: white;
   height: 40px;
 }
+
+.bottomBtnsDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottomBtnsDiv button {
+  background: orange;
+  color: black;
+}
+
+.paginationPages {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

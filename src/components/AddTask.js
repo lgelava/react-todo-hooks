@@ -3,13 +3,14 @@ import { useRef } from "react";
 const AddTask = ({ onAdd }) => {
   const inputRef = useRef("");
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     onAdd(inputRef.current.value);
     inputRef.current.value = "";
   };
 
   return (
-    <>
+    <form>
       <input
         ref={inputRef}
         type="text"
@@ -21,7 +22,7 @@ const AddTask = ({ onAdd }) => {
         {" "}
         Add Task
       </button>
-    </>
+    </form>
   );
 };
 
