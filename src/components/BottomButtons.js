@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import CheckAll from "./CheckAll";
-const BottomButtons = ({ tasks, checkAll, onDeleteAllChecked }) => {
+
+import { useSelector } from "react-redux";
+
+const BottomButtons = ({ checkAll, onDeleteAllChecked }) => {
   const everyChecked = (currentValue) => currentValue.checked;
+
+  const tasks = useSelector((state) => state.todos.items);
+
   return (
     <div>
       <div className="bottomBtnsDiv">
