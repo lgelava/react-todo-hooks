@@ -1,22 +1,21 @@
 import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { submitEditTodo } from "../redux/actions/todoActions";
+import {
+  submitEditTodo,
+  checkTodo,
+  deleteTodo,
+  currentPageChanged,
+} from "../redux/actions/todoActions";
 
 const TaskItem = ({ task }) => {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.todos.items);
+  const currentPage = useSelector((state) => state.todos.currentPage);
 
   const [editTodoStatus, setEditTodoStatus] = useState(false);
   const inputRef = useRef("");
 
-  const onEditBtnSubmit = (id, text) => {
-    const editedTasks = tasks.map((task) => {
-      if (task.id === id && text !== "") {
-        task.text = text;
-      }
-    });
-  };
   const onEditBtn = () => {
     setEditTodoStatus(true);
   };
@@ -25,18 +24,31 @@ const TaskItem = ({ task }) => {
     setEditTodoStatus(false);
   };
 
-  const onEditSubmit = () => {
+  const onEditSubmit = (id) => {
     setEditTodoStatus(false);
 
-    onEditBtnSubmit(task.id, inputRef.current.value);
+    const updatedItems = tasks.map((el) => {
+      return el.id === id ? { ...el, text: inputRef.current.value } : el;
+    });
+
+    dispatch(submitEditTodo(updatedItems));
   };
 
   const onCheck = (id) => {
-    tasks.map((task) => {
-      if (task.id === id) {
-        task.checked = !task.checked;
-      }
+    const checkedItems = tasks.map((item) => {
+      return item.id === id ? { ...item, checked: !task.checked } : item;
     });
+    dispatch(checkTodo(checkedItems));
+  };
+
+  const deleteTask = (id) => {
+    const filteredTasks = tasks.filter((task) => task.id !== id);
+    dispatch(deleteTodo(filteredTasks));
+    if (Math.ceil(tasks.length / 5) - currentPage === 0) {
+      const pageChangedAfterDelete = Math.ceil((tasks.length - 1) / 5);
+
+      dispatch(currentPageChanged(pageChangedAfterDelete));
+    }
   };
 
   return (
@@ -46,7 +58,7 @@ const TaskItem = ({ task }) => {
           <div className="d-flex align-items-center">
             <input
               type="checkbox"
-              defaultChecked={task.checked}
+              checked={task.checked}
               onChange={() => onCheck(task.id)}
             />
             <p>{task.text}</p>
@@ -55,7 +67,12 @@ const TaskItem = ({ task }) => {
             <button className="btn edit" onClick={onEditBtn}>
               Edit
             </button>
-            <button className="deleteBtn btn">Delete</button>
+            <button
+              className="deleteBtn btn"
+              onClick={() => deleteTask(task.id)}
+            >
+              Delete
+            </button>
           </div>
         </div>
       ) : (
@@ -67,7 +84,11 @@ const TaskItem = ({ task }) => {
               className="editInput"
               defaultValue={task.text || ""}
             />
-            <button type="submit" onClick={onEditSubmit} className="btn">
+            <button
+              type="submit"
+              onClick={() => onEditSubmit(task.id)}
+              className="btn"
+            >
               Submit
             </button>
             <button onClick={onEditCancel} className="editCancel btn">

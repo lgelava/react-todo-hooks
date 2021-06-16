@@ -8,22 +8,13 @@ const CheckAll = () => {
   const dispatch = useDispatch();
 
   const checkAll = () => {
-    // setTasks(
-    //   tasks.map((task) => {
-    //     return tasks.every(everyChecked)
-    //       ? { ...task, checked: false }
-    //       : { ...task, checked: true };
-    //   })
-    // );
-
-    if (tasks.every(everyChecked)) {
-      alert(1);
-      tasks.map((task) => (task.checked = false));
-    } else {
-      alert(2);
-      tasks.map((task) => (task.checked = true));
-      console.log(tasks);
-    }
+    const allChecked = tasks.map((item) => {
+      return tasks.every(everyChecked)
+        ? { ...item, checked: false }
+        : { ...item, checked: true };
+    });
+    dispatch(checkAllTodos(allChecked));
+    console.log(tasks);
   };
 
   return (
