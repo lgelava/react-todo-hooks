@@ -8,7 +8,6 @@ export const actionTypes = {
   PAGE_CLICK: "PAGE_CLICK",
   CURRENT_PAGE_CHANGED: "CURRENT_PAGE_CHANGED",
   CURRENT_PAGE_DECREMENTED: "CURRENT_PAGE_DECREMENTED",
-  SAME_PAGE: "SAME_PAGE",
 };
 
 export const addTodo = (newTodo, newPage) => ({
@@ -50,9 +49,4 @@ export const currentPageChanged = (pageChangedAfterDelete) => ({
 export const currentPageDecremented = (pageDecremented) => ({
   type: actionTypes.CURRENT_PAGE_DECREMENTED,
   pageDecremented,
-});
-
-export const samePage = (pageStayedSame) => ({
-  type: actionTypes.SAME_PAGE,
-  pageStayedSame,
 });

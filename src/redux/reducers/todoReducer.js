@@ -53,12 +53,6 @@ export default function (state = initialState, action) {
         currentPage: action.pageDecremented,
       };
 
-    case actionTypes.SAME_PAGE:
-      return {
-        ...state,
-        currentPage: action.pageStayedSame,
-      };
-
     //   return {};
     default:
       return state;
