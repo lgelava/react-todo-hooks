@@ -1,0 +1,9 @@
+.bottomBtnsDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottomBtnsDiv button {
+  background: orange;
+  color: black;
+}

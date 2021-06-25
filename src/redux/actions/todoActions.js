@@ -8,22 +8,26 @@ export const actionTypes = {
   PAGE_CLICK: "PAGE_CLICK",
   CURRENT_PAGE_CHANGED: "CURRENT_PAGE_CHANGED",
   CURRENT_PAGE_DECREMENTED: "CURRENT_PAGE_DECREMENTED",
+  GET_TODOS_HANDLER: "GET_TODOS_HANDLER",
+  DELETE_ALL_CHECKED: "DELETE_ALL_CHECKED",
+  PAGE_CHANGER: "PAGE_CHANGER",
 };
 
-export const addTodo = (newTodo, newPage) => ({
+export const addTodo = (newTodo) => ({
   type: actionTypes.ADD_TODO,
   newTodo,
-  newPage,
 });
 
-export const submitEditTodo = (updatedItems) => ({
+export const submitEditTodo = (id, newText) => ({
   type: actionTypes.SUBMIT_EDIT_TODO,
-  updatedItems,
+  id,
+  newText,
 });
 
-export const checkTodo = (checkedItems) => ({
+export const checkTodo = (id, checked) => ({
   type: actionTypes.CHECK_TODO,
-  checkedItems,
+  id,
+  checked,
 });
 
 export const checkAllTodos = (allChecked) => ({
@@ -31,9 +35,9 @@ export const checkAllTodos = (allChecked) => ({
   allChecked,
 });
 
-export const deleteTodo = (filteredTasks) => ({
+export const deleteTodo = (id) => ({
   type: actionTypes.DELETE_TODO,
-  filteredTasks,
+  id,
 });
 
 export const pageClick = (pageNumber) => ({
@@ -41,12 +45,16 @@ export const pageClick = (pageNumber) => ({
   pageNumber,
 });
 
-export const currentPageChanged = (pageChangedAfterDelete) => ({
-  type: actionTypes.CURRENT_PAGE_CHANGED,
-  pageChangedAfterDelete,
+export const deleteAllTodosChecked = (tasks) => ({
+  type: actionTypes.DELETE_ALL_CHECKED,
+  tasks,
 });
 
-export const currentPageDecremented = (pageDecremented) => ({
-  type: actionTypes.CURRENT_PAGE_DECREMENTED,
-  pageDecremented,
+export const getTodosHandler = (todoList) => ({
+  type: actionTypes.GET_TODOS_HANDLER,
+  todoList,
+});
+
+export const pageChanger = () => ({
+  type: actionTypes.PAGE_CHANGER,
 });

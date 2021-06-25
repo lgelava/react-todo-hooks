@@ -1,0 +1,31 @@
+.task {
+  background: #f4f4f4;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task p {
+  margin-top: 18px;
+  margin-left: 10px;
+}
+
+.task h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit {
+  background: blue;
+}
+
+.deleteBtn,
+.editCancel {
+  background: red;
+  color: white;
+  height: 40px;
+}
